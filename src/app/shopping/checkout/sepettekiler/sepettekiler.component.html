@@ -1,0 +1,20 @@
+<li class="list-group-item pt-2">
+  <div class="row align-items-center">
+    <div class="col-4">
+      <a routerLink='/details'>
+          <img [src]= "productEl.image" alt="products" class="img-fluid"
+            style="max-height:100px; background-color:gray">
+      </a>
+    </div>
+    <div class="col">
+      <p class="mb-4 font-size-sm font-weight-bold">
+      <a class="text-body text-capitalize" routerLink="/shop/canta">{{ productEl.isim }}</a><br>
+      <span class="text-muted">{{ productEl.fiyat}} ₺ x {{ productEl.quantity}} </span>
+      </p>
+      <div class="font-size-sm text-muted">
+        Renk <span [ngStyle]="{'background-color':productEl.renk}"> El </span>
+      </div>
+    </div>
+  </div>
+</li>
+

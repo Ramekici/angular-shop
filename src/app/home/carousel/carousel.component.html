@@ -1,0 +1,79 @@
+<section>
+    <div data-flickity="{&quot;prevNextButtons&quot;: true,
+      &quot;fade&quot;: true}"
+      class="flickity-enabled is-draggable is-fade" tabindex="0">
+      <div class="flickity-viewport" style="height: 600px; touch-action: pan-y;">
+      <div class="flickity-slider" style="left: 0px; transform: translateX(0%);">
+        <div [ngClass] = "['w-100 bg-cover', index === 0 ? 'is-selected':'']"
+        [ngStyle]= "{'background-image': 'url(assets/canta/anasayfa03.png)', 'position':'absolute', 'left': '0%', 'opacity': index === 0 ? '1':'0', 'width':'100%'}">
+        <div class="container d-flex flex-column">
+          <div class="row py-12" style="min-height: 550px;">
+            <div class="col-12 col-md-6 col-lg-3 col-xl-4 offset-md-1">
+              <h1>Kışlık İndirimi</h1>
+              <h2 class="display-1 text-primary">70% indirim</h2>
+              <h5 class="mt-n4 mb-8"> Promosyon Kodu CN67EW*</h5>
+              <a class="btn btn-dark" routerLink = "/shop">
+                Alışverişe Başla <i class="fas fa-caret-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div [ngClass] = "['w-100 bg-cover', index === 1 ? 'is-selected':'']"
+      [ngStyle]= "{'background-image': 'url(assets/canta/anasayfa03.png)', 'position':'absolute', 'left': '0%', 'opacity': index === 1 && (-1) ? '1':'0', 'width':'100%'}">
+        <div class="container d-flex flex-column">
+          <div class="row align-items-center justify-content-end py-12"
+          style="min-height: 550px;">
+            <div class="col-12 col-md-6 col-lg-5 col-xl-4 offset-md-n1">
+              <!-- Heading -->
+              <h1 class="mb-5">Summer Collection</h1>
+              <!-- Text -->
+              <p class="mb-8 font-size-lg text-gray-500">
+                So called give, one whales tree seas dry place own
+                day, winged tree created spirit.
+              </p>
+              <!-- Button -->
+              <a class="btn btn-dark" href="shop.html">
+                Shop Now <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div [ngClass] = "['w-100 bg-cover', index === 2 ? 'is-selected':'']"
+      [ngStyle]= "{'background-image': 'url(assets/canta/anasayfa03.png)', 'position':'absolute', 'left': '0%', 'opacity': index === 2 && (-2) ? '1':'0', 'width':'100%'}" >
+        <div class="bg-dark-20">
+          <div class="container d-flex flex-column">
+            <div class="row align-items-center justify-content-end" style="min-height: 550px;">
+              <div class="col-12 text-center text-white">
+                <h4 class="mb-0">Summer Styles</h4>
+                <h1 class="display-1">
+                  50% OFF
+                </h1>
+                <p class="mb-0">
+                  <a href="shop.html" class="link-underline text-reset mx-4 my-4">Shop Women</a>
+                  <a href="shop.html" class="link-underline text-reset mx-4 my-4">Shop Men</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      <button class="flickity-button flickity-prev-next-button previous"
+      type="button" aria-label="Previous" (click)="onBack()">
+      <svg class="flickity-button-icon" viewBox="0 0 100 100">
+        <path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z"
+        class="arrow"></path>
+      </svg>
+    </button>
+    <button class="flickity-button flickity-prev-next-button next"
+    type="button" aria-label="Next" (click)="onNext()">
+      <svg class="flickity-button-icon" viewBox="0 0 100 100">
+        <path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z"
+        class="arrow" transform="translate(100, 100) rotate(180)"></path>
+      </svg>
+    </button>
+  </div>
+</section>

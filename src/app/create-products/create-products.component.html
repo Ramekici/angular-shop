@@ -1,0 +1,98 @@
+<div class="container mx-auto mb-5 pb-3">
+    <div class="bg-light box-shadow-lg rounded-lg overflow-hidden">
+      <div class="row">
+        <section class="col-lg-8 pt-lg-4 pb-4 mb-3 mx-auto">
+          <div class="pt-2 px-4 pl-lg-0 pr-xl-5">
+            <div class="d-sm-flex flex-wrap justify-content-between align-items-center pb-2">
+              <h2 class="h3 py-2 mx-auto text-center text-sm-left"> Yeni Ürün Ekle </h2>
+            </div>
+            <form (submit)="onAddUpdateProduct()" [formGroup]="form"  enctype="multipart/form-data">
+              <div class="form-group pb-2">
+                    <input class="form-control"
+                      placeholder="Ürün Sektör"
+                      type="text"
+                      formControlName = "sektor" >
+              </div>
+              <div class="form-group pb-2">
+                <input class="form-control"
+                  placeholder="Urun Adı"
+                  type="text"
+                  formControlName = "isim">
+              </div>
+              <div class="form-group pb-2">
+                  <input class="form-control"
+                  type="text"
+                  placeholder="Urun Markası"
+                  formControlName = "marka">
+              </div>
+              <div class="form-group pb-2">
+                  <input class="form-control"
+                    type="number"
+                    placeholder="Urun Stok Miktarı"
+                    formControlName = "miktar">
+              </div>
+              <div formGroupName="renk">
+                <div class="form-group pb-2">
+                    <input class="form-control"
+                      type="text"
+                      placeholder="renk1"
+                      formControlName = "renk1" >
+                </div>
+                <div class="form-group pb-2">
+                  <input class="form-control"
+                    type="text"
+                    placeholder="renk2"
+                    formControlName = "renk2" >
+              </div>
+              <div class="form-group pb-2">
+                <input class="form-control"
+                  type="text"
+                  placeholder="renk3"
+                  formControlName = "renk3" >
+              </div>
+            </div>
+            <div class="pb-2">
+              <button class="btn-sm" type="button" (click)="filePicker.click()"> Resim Ekle </button>
+              <input style= "display: hidden;"
+                type="file"
+                #filePicker
+                (change)="onImagePicked($event)">
+            </div>
+            <div class="image-review" *ngIf="imagePreview !== '' && imagePreview">
+              <img [src]="imagePreview" alt="...">
+            </div>
+              <div class="form-group py-2">
+                <textarea class="form-control" rows="6"
+                placeholder="Urun Bilgisi"
+                formControlName = "aciklama"
+                ></textarea>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">₺</span></div>
+                    <input class="form-control"
+                      type="number"
+                      placeholder="Urun Fiyatı"
+                      formControlName = "fiyat">
+                  </div>
+                </div>
+                <div class="col-sm-6 form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">₺</span></div>
+                    <input class="form-control"
+                      type="number"
+                      placeholder="Urun İndirmli Fiyatı"
+                      formControlName = "indirim">
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-block" type="submit">Ürünü Yükle</button>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,111 @@
+mat-spinner {
+  margin: auto;
+ }
+[class^="fab fa-"], [class*=" fab fa-"] {
+  display: inline-block;
+  font-family: 'cartzilla-icons' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+}
+
+.social-btn {
+  display: inline-block;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid transparent;
+  transition: border-color 0.25s ease-in-out, background-color 0.25s ease-in-out,color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+  border-radius: .3125rem;
+  background-color: #f3f5f9;
+  color: #4b566b;
+  font-size: .875rem;
+  text-align: center;
+  text-decoration: none !important;
+}
+
+.input-group-overlay {
+  position: relative;
+  width: 100%;
+}
+
+.custom-control {
+  position: relative;
+  display: block;
+  min-height: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.input-group-append-overlay, .input-group-prepend-overlay {
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  z-index: 5;
+}
+.input-group-overlay .prepended-form-control:not(.rounded-left-0) {
+  padding-left: 2.5rem;
+  border-top-left-radius: .3125rem !important;
+  border-bottom-left-radius: .3125rem !important;
+}
+.input-group-append-overlay .input-group-text,
+.input-group-prepend-overlay .input-group-text {
+  border: 0;
+  background-color: transparent;
+}
+.input-group-text {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: .625rem 1rem;
+  margin-bottom: 0;
+  font-size: .9375rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #4b566b;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #fff;
+  border: 1px solid #dae1e7;
+  border-radius: .3125rem;
+}
+.password-toggle .form-control {
+  padding-right: 3rem;
+}
+.password-toggle {
+  position: relative;
+}
+.password-toggle-btn {
+  position: absolute;
+  top: 50%;
+  right: .625rem;
+  margin-bottom: 0;
+  padding: .5rem;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  font-size: 1.0625rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 1.25rem + 2px);
+  padding: .625rem 1rem;
+  font-size: .9375rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #4b566b;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #dae1e7;
+  border-radius: .3125rem;
+  box-shadow: 0 0 0 0 transparent;
+  transition: border-color 0.2s ease-in-out,box-shadow 0.2s ease-in-out;
+}
+

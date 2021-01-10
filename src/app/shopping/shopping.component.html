@@ -1,0 +1,32 @@
+  <app-filtering></app-filtering>
+  <router-outlet></router-outlet>
+  <section class="py-12">
+    <div class="container">
+      <div class="row">
+        <app-products [productsPerPage]="pageSize" [currentPage]="currentPage"></app-products>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="row justify-content-center mt-7">
+            <div class="col-12 text-center">
+              <p class="font-size-sm text-muted">
+                Toplam {{valueMaxi}} üründen {{valueNowi}}'sı gösterilmektedir.
+              </p>
+              <div class="progress mx-auto mb-7" style="max-width: 250px;">
+                <div class="progress-bar bg-dark" role="progressbar" [style.width.%]="valueYuzde"
+                [attr.aria-valuenow]="valueNowi" [attr.aria-valuemin]="0" [attr.aria-valuemax]="valueMaxi"></div>
+              </div>
+              <button class="btn btn-sm btn-outline-dark mr-5" (click)="onChangeBack()">
+                Geri
+              </button>
+              <button class="btn btn-sm btn-outline-dark ml-5" (click)="onChangeNext()">
+                İleri
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+

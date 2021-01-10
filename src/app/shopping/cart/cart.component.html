@@ -1,0 +1,75 @@
+<section class="pt-7 pb-12 mb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h4 class="mb-10 text-center">Sepetim</h4>
+        </div>
+      </div>
+      <div class="row" *ngIf="cartProducts.length > 0">
+        <div class="col-12 col-md-7">
+          <ul class="list-group list-group-lg list-group-flush-x mb-3">
+            <li class="list-group-item" *ngFor="let product of cartProducts"
+            id="product.productId">
+              <div class="row align-items-center">
+                <div class="col-3">
+                  <a routerLink="/shop">
+                    <img [src]="product.image" alt="products" class="img-fluid">
+                  </a>
+                </div>
+                <div class="col">
+                  <div class="d-flex mb-2 font-weight-bold">
+                    <a class="text-body text-capitalize" routerLink="/shop">{{product.name}}</a>
+                    <span *ngIf="!product.indirim" class="ml-auto">{{product.fiyat}} ₺ x {{product.quantity}}</span>
+                    <span *ngIf="product.indirim" class="ml-auto">{{product.indirim}} ₺</span>
+                  </div>
+                  <p class="mb-7 font-size-sm text-muted">
+                    Renk: {{ product.renk }}
+                  </p>
+                  <div class="d-flex align-items-center">
+                      <select class="custom-select custom-select-xxs w-auto"
+                      name="miktar" (change)="selectMiktar($event, product.id)">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                      </select>
+                    <button class="font-size-xs text-gray-800 ml-auto"
+                    (click)="onDeletedCart(product.productId)">
+                      <i class="fas fa-trash-alt"></i> Sil
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div class="row align-items-end justify-content-between mb-10 mb-md-0">
+            <div class="col-12 col-md-7">
+              <form class="mb-7 mb-md-0">
+                <label class="font-size-sm font-weight-bold" for="cartCouponCode">
+                  Kupon Kodu
+                </label>
+                <div class="row form-row">
+                  <div class="col">
+                    <input class="form-control form-control-sm"
+                    id="cartCouponCode" type="text" placeholder="Enter coupon code*">
+                  </div>
+                  <div class="col-auto">
+                    <button class="btn btn-sm btn-dark" type="submit">
+                      Uygula
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-5 col-lg-4 offset-lg-1">
+          <app-maliyet [total]= "total" [subTot]="subtotal" [taxc]="tax"></app-maliyet>
+          <a class="btn btn-block btn-dark mb-2" routerLink= "/checkout">Ödeme İşlemlerine Devam Et</a>
+          <a class="btn btn-link btn-sm px-0 text-body" routerLink= "/shop" >
+            <i class="fas fa-caret-left mr-2"></i> Alışverişe Devam Et
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <p *ngIf= "cartProducts.length === 0" class="text-center"> Sepetinizde urun bulunmamaktadır.</p>

@@ -1,0 +1,72 @@
+<div [ngClass] = "['modal fixed-right fade' , modalPos ? 'show' : '']"
+  id="modalSearch" tabindex="-1" role="dialog"
+  style = "padding-right:15px;"
+  [style.display]= " modalPos ? 'inline-block' : 'none'" >
+  <div class="modal-dialog modal-dialog-vertical" role="document">
+    <div class="modal-content">
+      <!-- Close -->
+      <button type="button" class="close" (click)="onCloseModal()">
+        x
+      </button>
+      <!-- Header-->
+      <div class="modal-header line-height-fixed font-size-lg">
+        <strong class="mx-auto">Ürün Ara</strong>
+      </div>
+      <!-- Body: Form -->
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label class="sr-only" for="modalSearchCategories">Categories:</label>
+            <select class="custom-select" id="modalSearchCategories">
+              <option selected="">All Categories</option>
+              <option>Bayan</option>
+              <option>Bay</option>
+              <option>Cocuk</option>
+            </select>
+          </div>
+          <div class="input-group input-group-merge">
+            <input class="form-control" type="search" placeholder="Ürün Ara">
+            <div class="input-group-append">
+              <button class="btn btn-outline-border" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- Body: Results (add `.d-none` to disable it) -->
+      <div class="modal-body border-top font-size-sm">
+        <!-- Heading -->
+        <p>Arama Sonuçları:</p>
+        <!-- Items -->
+        <div class="row align-items-center position-relative mb-5">
+          <div class="col-4 col-md-3">
+            <!-- Image -->
+            <img class="img-fluid" src="../../../assets/canta/canta03.png" alt="...">
+          </div>
+          <div class="col position-static">
+            <!-- Text -->
+            <p class="mb-0 font-weight-bold">
+              <a class="stretched-link text-body" href="./product.html">Leather mid-heel Sandals</a> <br>
+              <span class="text-muted">$129.00</span>
+            </p>
+          </div>
+        </div>
+        <!-- Button -->
+        <a class="btn btn-link px-0 text-reset" href="./shop.html">
+          Hepsini Göster <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+      <!-- Body: Empty (remove `.d-none` to disable it) -->
+      <div class="d-none modal-body">
+        <!-- Text -->
+        <p class="mb-3 font-size-sm text-center">
+          Aradığınız ürün bulunamadı
+        </p>
+        <p class="mb-0 font-size-sm text-center">
+          😞
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

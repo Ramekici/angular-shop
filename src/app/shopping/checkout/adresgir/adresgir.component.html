@@ -1,0 +1,121 @@
+ <!-- Address -->
+ <div class="mb-9">
+    <div class="collapse show">
+      <div class="row mt-6">
+        <form #checkout="ngForm" (submit)="onSubmitForm(checkout)" >
+          <div class="row mb-9">
+            <div class="col-12 col-md-6">
+              <!-- First Name -->
+              <div class="form-group">
+                <input class="form-control form-control-sm"
+                 type="text"
+                 name="ad"
+                 placeholder="Adınız"
+                 required
+                 ngModel>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <!-- Last Name -->
+              <div class="form-group">
+                <input class="form-control form-control-sm"
+                type="text"
+                placeholder="Soyadınız"
+                name="soyad"
+                required
+                ngModel>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <!-- İl -->
+              <div class="form-group">
+                <input class="form-control form-control-sm"
+                type="text"
+                placeholder="Adres Tanım"
+                name="adresTanim"
+                required
+                ngModel>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <!-- İl -->
+              <div class="form-group">
+                <input class="form-control form-control-sm"
+                type="text"
+                placeholder="Tc No"
+                name="tcNo"
+                required
+                ngModel>
+              </div>
+            </div>
+            <div class="col-12">
+              <!-- Address Line 1 -->
+              <div class="form-group">
+                <input class="form-control form-control-sm"
+                 type="text"
+                 placeholder="Acık Adres"
+                 name="acikAdres1"
+                 required
+                 ngModel>
+              </div>
+            </div>
+            <div class="col-12">
+              <!-- Address Line 2 -->
+              <div class="form-group">
+                <input class="form-control form-control-sm"
+                 type="text"
+                 name="acikAdres2"
+                 placeholder=" Açık Adres Devam (opsiyonel)"
+                 ngModel>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <!-- Town / City -->
+              <div class="form-group">
+                <input class="form-control form-control-sm"
+                   type="text"
+                   placeholder="İlçe"
+                   name="ilce"
+                   required
+                   ngModel>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <!-- İL -->
+              <div class="form-group">
+                <input class="form-control form-control-sm"
+                type="text"
+                placeholder="İl"
+                name="il"
+                required
+                ngModel>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <!-- Mobile Phone -->
+              <div class="form-group mb-0">
+                <input class="form-control form-control-sm"
+                 type="tel"
+                 placeholder="İletişim Numarası"
+                 name="telefon"
+                 required
+                 ngModel>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <!--Posta Kodu -->
+              <div class="form-group mb-0">
+                <input class="form-control form-control-sm"
+                 type="text"
+                 placeholder="Posta Kodu"
+                 name="postaKodu"
+                 required
+                 ngModel>
+              </div>
+            </div>
+          </div>
+          <button type="submit"> Adres Ekle </button>
+        </form>
+      </div>
+    </div>
+  </div>

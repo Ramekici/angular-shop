@@ -1,0 +1,58 @@
+<section [ngClass]="['collapse', showFiltered ? 'show' : '']" id="collapseFilter">
+  <form class="py-7 border-bottom" [formGroup]="form" (ngSubmit)="submitForm()">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <p class="font-size-lg">
+            <strong>Kategori:</strong>
+          </p>
+          <div class="form-group form-group-overflow mb-md-0" *ngFor="let data of datam; let i=index">
+            <div class="custom-control custom-checkbox mb-1">
+              <input class="custom-control-input" [id]="data.name" name="category"
+              type="checkbox" [value]="data.value" (change)="onCheckboxChange($event)">
+              <label class="custom-control-label text-capitalize" [for]="data.name"> {{data.name}} </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <p class="font-size-lg"><strong>Renk:</strong></p>
+          <div class="form-group form-group-overflow mb-md-0" style="display: inline-block;" *ngFor="let dat of renkDatam; let i=index">
+            <div class="custom-control custom-control-color custom-control-inline">
+              <input class="custom-control-input" [id]="dat.name" type="checkbox"
+              [value]="dat.value" (change)="onCheckboxChange($event)" >
+              <label class="custom-control-label" [ngStyle]= "{'color': dat.renk}" [for]="dat.name"></label>
+            </div>
+          </div>
+          <p class="font-size-lg"><strong>Fiyat Aralığı:</strong></p>
+          <div class="bar" [style.width.%]="value"></div>
+          <div class="d-flex align-items-center">
+            <input type="number" class="form-control form-control-xs"
+            placeholder="10.00 ₺" min="10">
+            <div class="text-gray-350 mx-2">‒</div>
+            <input type="number" class="form-control form-control-xs"
+            placeholder="500.00 ₺" max="500">
+          </div>
+          <label>
+            Enter an example progress value
+            <input type="number" min="0" max="100"
+                [value]="progress" (input)="progress = $event.target.value">
+          </label>
+        </div>
+        <div class="col-12 col-md-4">
+          <p class="font-size-lg"><strong>Fiyat:</strong></p>
+          <div class="form-group form-group-overflow mb-md-0" id="priceGroup" *ngFor="let da of fiyatDatam; let i=index">
+            <div class="custom-control custom-checkbox mb-1">
+              <input class="custom-control-input" [id]="da.name" type="checkbox"
+              [value]="da.value" (change)="onCheckboxChange($event)">
+              <label class="custom-control-label" [for]="da.name">
+                {{da.name}} ₺
+              </label>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-sm btn-dark mx-auto mt-5" type="submit"> Filtrele</button>
+      </div>
+    </div>
+  </form>
+</section>
+

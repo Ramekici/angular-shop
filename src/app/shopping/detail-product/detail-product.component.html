@@ -1,0 +1,146 @@
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <!-- Card -->
+            <div class="card">
+              <!-- Badge -->
+              <div class="badge badge-primary card-badge text-uppercase">
+                Yeni
+              </div>
+              <!-- Slider -->
+              <div class="mb-4 flickity-enabled is-fade"
+              data-flickity="{&quot;draggable&quot;: false, &quot;fade&quot;: true}"
+              id="productSlider" tabindex="0">
+              <div class="flickity-viewport" style="height: 400px; touch-action: pan-y;">
+                <div class="flickity-slider" style="left: 0px; transform: translateX(0%);">
+                  <a data-fancybox="true"
+                    style="position: absolute; left: 0%; opacity: 1;" class="is-selected">
+                    <img [src]="detailImage" alt="..." class="card-img-top" style="max-height:380px">
+                  </a>
+              </div>
+            </div>
+          </div>
+            </div>
+            <!-- Slider -->
+            <div class="flickity-nav mx-n2 mb-10 mb-md-0 flickity-enabled is-draggable"
+            data-flickity="{&quot;asNavFor&quot;: &quot;#productSlider&quot;, &quot;contain&quot;: true, &quot;wrapAround&quot;: false}" tabindex="0">
+            <div class="flickity-viewport" style="height: 100px; touch-action: pan-y;">
+              <div class="flickity-slider" style="left: 0px; transform: translateX(0%);">
+              <div class="col-12 px-2 is-nav-selected is-selected"
+              style="max-width: 113px; position: absolute; left: 0%;">
+                <!-- Image -->
+                <div class="embed-responsive embed-responsive-1by1 bg-cover"
+                (click)="onSelectedImage(0)"
+                [ngStyle]= "{'background-image': 'url(assets/canta/anasayfa03.png)'}"></div>
+              </div>
+              <div class="col-12 px-2" style="max-width: 113px; position: absolute; left: 32.85%;">
+                <!-- Image -->
+                <div class="embed-responsive embed-responsive-1by1 bg-cover"
+                (click)="onSelectedImage(1)"
+                [ngStyle]= "{'background-image': 'url(assets/canta/anasayfa03.png)'}"></div>
+              </div>
+              <div class="col-12 px-2" style="max-width: 113px; position: absolute; left: 65.7%;">
+                <!-- Image -->
+                <div class="embed-responsive embed-responsive-1by1 bg-cover"
+                (click)="onSelectedImage(2)"
+                [ngStyle]= "{'background-image': 'url(assets/canta/anasayfa03.png)'}"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<!--------------------------------------------------------------------------------->
+          <div class="col-12 col-md-6 pl-lg-10">
+            <!-- Header -->
+            <div class="row mb-1">
+              <div class="col">
+                <!-- Preheading -->
+                <a class="text-muted" [routerLink]="['/shop/', detailProduct.sektor]">
+                  {{detailProduct.sektor}} </a>
+              </div>
+              <div class="col-auto">
+                <!-- Rating -->
+                <app-star [ortalama]="ortPuan"></app-star>
+                <a class="font-size-sm text-reset ml-2" href="#reviews">
+                  Yorumlar {{detailProduct.yorumlar.length}}
+                </a>
+              </div>
+            </div>
+            <!-- Heading -->
+            <h3 class="mb-2"> {{detailProduct.isim}} </h3>
+            <!-- Price -->
+            <div class="mb-7 text-gray-400">
+              <span class="ml-1 font-size-h5 font-weight-bold"> {{detailProduct.indirim}} ₺</span>
+              <span class="ml-1 font-size-sm" *ngIf="!inStock"> Urün Stokta Yok </span>
+            </div>
+            <!-- Form -->
+            <form>
+              <div class="form-group">
+                <!-- Label -->
+                <p class="mb-4">
+                  Renk: <strong><span id="sizeCaption"> Renk Seçin</span></strong>
+                </p>
+                <!-- Radio -->
+                <div class="form-group form-group-overflow mb-md-0" *ngFor="let r of detailArrayRenk" style="display: inline-block;">
+                  <div class="custom-control custom-control-color custom-control-inline mb-2">
+                    <input type="radio" (change)="addColorToCart($event)"
+                    class="custom-control-input"
+                    name="r" [id]="r"
+                    [value]="r" data-toggle="form-caption" data-target="#sizeCaption">
+                    <label class="custom-control-label" [ngStyle]="{'color': r}" [for]="r"></label>
+                  </div>
+                </div>
+                <div class="form-row mb-7">
+                  <div class="col-12 col-lg-auto">
+                    <!-- Submit -->
+                    <button *ngIf="inStock && !inCart"
+                      (click)= "onAddToCart(detailProduct, 1)"
+                      class="btn btn-block btn-dark mb-2"
+                      data-toggle="button">
+                      <i class="fas fa-shopping-bag mr-2"></i> Sepete Ekle
+                    </button>
+                    <button *ngIf="inCart"
+                      (click)= "onDeleteFromSepet()"
+                      class="btn btn-block btn-dark mb-2"
+                      data-toggle="button">
+                      <i class="fas fa-shopping-bag mr-2"></i> Urun Sepete Eklendi
+                    </button>
+                    <button *ngIf="!inStock" class="btn btn-block btn-dark mb-2" data-toggle="button">
+                      <i class="fas fa-mail mr-2"></i> ÜrÜn Gelince Haber Ver
+                    </button>
+                  </div>
+                  <div class="col-12 col-lg-auto">
+                    <button class="btn btn-outline-dark btn-block mb-2" data-toggle="button">
+                      Favorilere Ekle <i class="fas fa-heart ml-2"></i>
+                    </button>
+                  </div>
+                </div>
+                <p>
+                  <span class="text-gray-500">Is your size/color sold out?</span>
+                  <a class="text-reset text-decoration-underline" data-toggle="modal" href="#modalWaitList">Join the Wait List!</a>
+                </p>
+                <p class="mb-0">
+                  <span class="mr-4">Paylaş:</span>
+                  <a class="btn btn-xxs btn-circle btn-light font-size-xxxs text-gray-350" href="#!">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                  <a class="btn btn-xxs btn-circle btn-light font-size-xxxs text-gray-350" href="#!">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                  <a class="btn btn-xxs btn-circle btn-light font-size-xxxs text-gray-350" href="#!">
+                    <i class="fab fa-pinterest-p"></i>
+                  </a>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-description [urunAci]="detailProduct"></app-description>
+<app-reviews [urunAcikla]="detailProduct"  [isAuth]="isAuthenticated"></app-reviews>

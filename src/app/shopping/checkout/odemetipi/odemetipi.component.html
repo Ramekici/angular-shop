@@ -1,0 +1,24 @@
+<div class="list-group-item">
+      <div class="custom-control custom-radio">
+        <input class="custom-control-input" id="checkoutPaymentCard" name="odeme" value="kredi"
+        type="radio" (change)="radioChangeHandler($event)">
+        <label class="custom-control-label font-size-sm text-body text-nowrap"
+        for="checkoutPaymentCard">
+          Kredi Kartı
+          <img class="ml-2" src="../../../../assets/svg/master.svg" alt="...">
+          <img class="ml-2" src="../../../../assets/svg/visa.svg" alt="...">
+          <img class="ml-2" src="../../../../assets/svg/maestro.svg" alt="...">
+        </label>
+      </div>
+  </div>
+  <app-kredikart [odemetipi]="userOdeme"></app-kredikart>
+  <div class="list-group-item">
+      <div class="custom-control custom-radio">
+        <input class="custom-control-input" id="checkoutPaymentPaypal" name="odeme" value="nakit"
+         type="radio" (change)="radioChangeHandler($event)">
+        <label class="custom-control-label font-size-sm text-body text-nowrap"
+        for="checkoutPaymentPaypal"> Havale/EFT
+        </label>
+      </div>
+  </div>
+

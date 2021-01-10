@@ -1,0 +1,36 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div *ngFor="let product of products"
+  class="col-6 col-md-3 col-lg-3"
+  style="display: inline-block;">
+  <div class="card mb-7">
+    <div class="badge badge-dark card-badge card-badge-left text-capitalize">
+      Yeni
+    </div>
+    <img [src]="product.imagePath" alt="product" class="card-img-top">
+    <div class="card-collapse-parent" style="transform: translateY(-64,5px);">
+      <div class="card-body px-0 bg-white text-center">
+        <div class="mb-1 font-weight-bold">
+          <div class="text-body"> {{ product.isim }} </div>
+        </div>
+        <div class="mb-1 font-weight-bold text-muted">
+          <span class="font-size-xs text-gray-350 text-decoration-line-through">
+          {{product.fiyat}} ₺
+          </span>
+          <span class="text-primary"> % {{ product.indirim}} </span>
+        </div>
+      </div>
+      <div class="card-collapse collapse show mb-1" style="height: 30px;">
+        <div class="card-footer px-0 pt-0 bg-white text-center">
+          <a class="btn btn-xs btn-link btn-circle"
+              data-toggle="modal" [routerLink] = "['/edit/', product.id]" >
+            <i class="fas fa-edit"></i>
+          </a>
+          <button class="btn btn-xs btn-link btn-circle" (click)="onDeleteProduct(product.id)" data-toggle="button">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p *ngIf="products.length <= 0">Urun Yüklenmedi....</p>

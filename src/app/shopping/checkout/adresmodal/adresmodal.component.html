@@ -1,0 +1,89 @@
+<form [ngClass]="['needs-validation modal fade', shw]" #adresForm="ngForm"
+    [ngStyle] ="{'padding-top': '3rem','padding-right': '15px','display': shw ? 'block':'none'}"
+    (submit)="adresEkle(adresForm)">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Yeni Adres Ekle</h5>
+        <button class="close" (click)="closeModal()" type="button">
+          <span aria-hidden="true">×</span></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input class="form-control" name="ad" type="text"
+                placeholder="Adınız" required [ngModel]="adresDetail.ad">
+              <div class="invalid-feedback">Lütfen Adınızı Gi</div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input class="form-control" name="soyad" type="text"
+               placeholder="Soyad" required [ngModel]="adresDetail.soyad">
+              <div class="invalid-feedback">Please fill in you last name!</div>
+            </div>
+          </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input class="form-control" type="text" placeholder="adres kayıt"
+                  name="adresTanim" [ngModel]="adresDetail.adresTanim">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input class="form-control"  name="tcNo" type="number"
+                  placeholder="TC NO" [ngModel]="adresDetail.tcNo">
+                  <div class="invalid-feedback">Please select your country!</div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input class="form-control" type="text" placeholder="adres 1"
+                  name="acikAdres1" required [ngModel]="adresDetail.acikAdres1">
+                  <div class="invalid-feedback">Please fill in your city!</div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input class="form-control" type="text" placeholder="adres 2"
+                  name="acikAdres2" required [ngModel]="adresDetail.acikAdres2">
+                  <div class="invalid-feedback">Please fill in your address!</div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input class="form-control" type="text" placeholder="il"
+                  name="il" [ngModel]="adresDetail.il">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input class="form-control" type="text" placeholder="ilce"
+                  name="ilce" required [ngModel]="adresDetail.ilce">
+                  <div class="invalid-feedback">Please add your ZIP code!</div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input class="form-control" type="text" placeholder="telefon"
+                  name="telefon" required [ngModel]="adresDetail.telefon">
+                  <div class="invalid-feedback">Please add your ZIP code!</div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input class="form-control" type="text" placeholder="Posta kodu"
+                  name="postaKodu" required [ngModel]="adresDetail.postaKodu" >
+                  <div class="invalid-feedback">Please add your ZIP code!</div>
+                </div>
+              </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" (click)="closeModal()">Kapat</button>
+        <button class="btn btn-primary btn-shadow" type="submit">Adres Ekle</button>
+      </div>
+    </div>
+  </div>
+</form>

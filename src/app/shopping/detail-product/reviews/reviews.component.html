@@ -1,0 +1,145 @@
+<section class="pt-9 pb-11" id="reviews">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <!-- Heading -->
+        <h4 class="mb-10 text-center">Müşteri Yorumları</h4>
+        <!-- No reviews -->
+        <div class="text-center">
+<!-- No reviews ------------------------------------------------->
+          <div *ngIf="urunAcikla.yorumlar.length > 0" >
+            <div class="review" *ngFor="let yorum of urunAcikla.yorumlar">
+                <div class="review-body" >
+                  <div class="row">
+                    <div class="col-12 col-md">
+                      <!-- Header -->
+                      <div class="row mb-6">
+                        <div class="col-12">
+                          <!-- Rating -->
+                          <div class="rating font-size-sm text-dark" [attr.data-value]="yorum.puan">
+                            <div class="rating-item">
+                              <i class="fas fa-star"></i>
+                            </div>
+                            <div class="rating-item">
+                              <i class="fas fa-star"></i>
+                            </div>
+                            <div class="rating-item">
+                              <i class="fas fa-star"></i>
+                            </div>
+                            <div class="rating-item">
+                              <i class="fas fa-star"></i>
+                            </div>
+                            <div class="rating-item">
+                              <i class="fas fa-star"></i>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <span class="font-size-xs text-muted text-capitalize">
+                            {{yorum.name}} <time datetime="'yorum.date'"> {{ yorum.date | date :'shortDate'}}</time>
+                          </span>
+                        </div>
+                      </div>
+                      <p class="mb-2 font-size-lg font-weight-bold text-capitalize">
+                        {{yorum.baslik}}
+                      </p>
+                      <p class="text-gray-500">
+                        {{yorum.metin}}
+                      </p>
+                      <!-- Footer -->
+                      <div class="row align-items-center" *ngIf="isAuth">
+                        <div class="col-auto d-none d-lg-block">
+                          <p class="mb-0 font-size-sm"> Bu yorumu faydalı buldunuz mu? </p>
+                        </div>
+                        <div class="col-auto mr-auto">
+                          <div class="rate" >
+                            <button class="rate-item" data-toggle="vote" data-count="3" role="button">
+                              <i class="fas fa-thumbs-up"></i>
+                            </button>
+                            <button class="rate-item" data-toggle="vote" data-count="0" role="button">
+                              <i class="fas fa-thumbs-down"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+<!-- No reviews ------------------------------------------------->
+          <div *ngIf="urunAcikla.yorumlar.length === 0">
+            <div class="mb-6 font-size-h1">🙁</div>
+            <p>Herhangi Bir müşteri yorumu bulunmamaktadır.</p>
+          </div>
+          <button (click)="changeHandler()" [disabled]="!isAuth" *ngIf="isAuth"
+          class="btn btn-sm btn-dark mt-2" data-toggle="collapse">
+          Yorum Ekle
+        </button>
+      </div>
+        <!-- New Review -->
+        <div [ngClass]= "['collapse', showYorum ? 'show' : '']" id="reviewForm" *ngIf="isAuth">
+          <!-- Divider -->
+          <hr class="my-8">
+          <!-- Form -->
+          <form (ngSubmit)="yorumHandler()">
+            <div class="row">
+              <div class="col-12 mb-6 text-center">
+                <!-- Text -->
+                <p class="mb-1 font-size-xs">
+                  Yıldız:
+                </p>
+                <!-- Rating form -->
+                <div class="rating-form">
+                  <!-- Input -->
+                  <input class="rating-input" type="range" min="1" max="5" [value]="starValue"
+                  (click)="onStarValue($event)">
+                  <!-- Rating -->
+                  <div #starEl class="rating h5 text-dark" [attr.data-value]="starValue">
+                    <div class="rating-item" >
+                      <i class="fas fa-star"></i>
+                    </div>
+                    <div class="rating-item">
+                      <i class="fas fa-star"></i>
+                    </div>
+                    <div class="rating-item">
+                      <i class="fas fa-star"></i>
+                    </div>
+                    <div class="rating-item">
+                      <i class="fas fa-star"></i>
+                    </div>
+                    <div class="rating-item">
+                      <i class="fas fa-star"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <!-- Name -->
+                <div class="form-group">
+                  <label class="sr-only" for="reviewTitle">Review Title:</label>
+                  <input class="form-control form-control-sm" id="reviewTitle" type="text"
+                  placeholder="Yorum Başlığı"  [formControl]="yorumBaslik"  required>
+                </div>
+              </div>
+              <div class="col-12">
+                <!-- Name -->
+                <div class="form-group">
+                  <label class="sr-only" for="reviewText">Review:</label>
+                  <textarea class="form-control form-control-sm" id="reviewText" rows="5"
+                  placeholder="Yorum"  [formControl]="yorumMetni" required></textarea>
+                </div>
+              </div>
+              <div class="col-12 text-center">
+                <!-- Button -->
+                <button class="btn btn-outline-dark" type="submit">
+                  Yorumu Onayla
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

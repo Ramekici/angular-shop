@@ -1,0 +1,48 @@
+<section class="pt-7 pb-12">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h4 class="mb-4">Ödeme</h4>
+        <p class="mb-10" *ngIf="!isAuth">
+          Hesabınız varsa ?
+          <span class="ml-3">
+            <a style="color: red;"
+            [routerLink] = "'/login'"> Giriş yapmak için tıklayınız... </a> </span>
+        </p>
+      </div>
+    </div>
+      <div class="row">
+          <div class="col-12 col-md-7">
+            <app-kayitli (showViso)="onShowed($event)" (userAdres)="selectedAdres($event)"
+              (editUpdate)="onUpdate($event)" (detailAdresim)="onShowDetail($event)" >
+            </app-kayitli>
+            <app-adresgir *ngIf="!isAuth"></app-adresgir>
+            <div *ngIf="isAuth" class="custom-control mb-2 mr-7" style="text-align: right;">
+              <button (click)="toggle()" class="btn btn-xs btn-link btn-circle"> Yeni Adres Ekle </button>
+            </div>
+            <app-adresmodal [idm]="adresId" [updateAdres]="updateAdres"
+              [showVis] = "visible" *ngIf="isAuth" (unShowed)="onUnShowed($event)" >
+            </app-adresmodal>
+            <h6 class="mb-7"> Ödeme Yöntemi </h6>
+            <div class="list-group list-group-sm mb-7">
+            <app-odemetipi></app-odemetipi>
+            </div>
+          </div>
+          <div class="col-12 col-md-5 col-lg-4 offset-lg-1">
+            <h6 class="mb-5"> Sepetinizdeki Ürün Sayısı ({{cartProducts.length}}) </h6>
+            <hr class="my-5">
+            <ul class="list-group list-group-lg list-group-flush-y list-group-flush-x mb-7">
+              <app-sepettekiler *ngFor="let product of cartProducts"
+              [product]= "product" ></app-sepettekiler>
+            </ul>
+            <app-maliyet [total]= "total" [subTot]="subtotal" [taxc]="tax"></app-maliyet>
+            <p class="mb-7 font-size-xs text-gray-500">
+              Kişisel bilgileriniz siparişiniz dışında kullanılmayacaktır.
+            </p>
+            <button class="btn btn-block btn-dark" (click)="onOrderSend()" type="button">
+              Ürün Siparişi Ver
+            </button>
+          </div>
+        </div>
+  </div>
+</section>

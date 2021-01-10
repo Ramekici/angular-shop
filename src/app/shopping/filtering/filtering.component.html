@@ -1,0 +1,41 @@
+<section class="py-7 border-bottom">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-12 col-md">
+          <nav class="nav nav-overflow mb-6 mb-md-0">
+            <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}"
+            routerLink="/shop">Hepsi</a>
+            <a class="nav-link" routerLinkActive="active" routerLink="/shop/canta">Çantalar</a>
+            <a class="nav-link" routerLinkActive="active" routerLink="/shop/cuzdan">Cüzdanlar</a>
+            <a class="nav-link" routerLinkActive="active" routerLink="/shop/valiz">Valizler</a>
+            <a class="nav-link" routerLinkActive="active" routerLink="/shop/sal">Şallar</a>
+          </nav>
+        </div>
+        <div class="col-12 col-md-auto text-center">
+          <button class="text-body" (click)="onShowFilter()"
+             role="button">
+            <i class="fas fa-filter mr-2"></i> Filtrele
+          </button>
+          <div [ngClass] = "['dropdown ml-6', dropPos ? 'show' : '']">
+            <button class="dropdown-toggle text-body" (click)="sirala()"> Sırala </button>
+            <form [ngClass] = "['dropdown-menu', dropPos ? 'show' : '']"
+            style = "position:absolute; transform: translate3d(0px, 23px, 0px);
+            top: 0 px; left: 0 px; will-change: transform;">
+              <div class="card">
+                <div class="card-body">
+                  <div class="form-group-overflow" *ngFor="let sortEl of sortDatam; let i= index">
+                    <div class="custom-control custom-control-text mb-3">
+                      <input class="custom-control-input" id="sortTwo" name="sort" type="radio"
+                      value="sortEl.value" (change) ="sortValue($event)">
+                      <label class="custom-control-label" for="sortTwo"> {{ sortEl.name}} </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <app-filtergorsel [showFiltered]="showFilter" ></app-filtergorsel>

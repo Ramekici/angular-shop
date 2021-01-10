@@ -1,0 +1,78 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div class="container" *ngIf="!isLoading">
+  <div class="row">
+      <div class="col-md-6 mx-auto mb-5">
+          <h2 class="h4 mb-3">Hesabın yok mu? Üye Olabilirsin</h2>
+          <p class="font-size-sm text-muted mb-4">Üyelik Zamanızı almaz</p>
+          <form class="needs-validation" (submit)="onRegister(registerForm)" #registerForm="ngForm">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="reg-fn">Adınız</label>
+                  <input class="form-control"
+                    type="text"
+                    required=""
+                    id="reg-fn"
+                    name="name"
+                    ngModel
+                    required>
+                  <div class="invalid-feedback">Lütfen Adınızı giriniz!</div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="reg-ln">Soyadınız</label>
+                  <input class="form-control"
+                  type="text"
+                  required
+                  name="surname"
+                  id="reg-ln"
+                  ngModel>
+                  <div class="invalid-feedback">Lütfen Soyadınızı giriniz!</div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="reg-email">E-mail Address</label>
+                  <input class="form-control"
+                    type="email"
+                    required
+                    id="reg-email"
+                    name="email"
+                    ngModel>
+                  <div class="invalid-feedback">Please enter valid email address!</div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="reg-phone">Phone Number</label>
+                  <input class="form-control"
+                  type="text"
+                  required
+                  id="reg-phone"
+                  name="phoneNumber"
+                  ngModel>
+                  <div class="invalid-feedback">Please enter your phone number!</div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="reg-password">Parola</label>
+                  <input class="form-control"
+                    type="password"
+                    required
+                    id="reg-password"
+                    name="password"
+                    ngModel>
+                  <div class="invalid-feedback">Lütfen Parolayı Giriniz!</div>
+                </div>
+              </div>
+            </div>
+            <div class="text-right">
+              <button class="btn btn-primary" type="submit">
+                <i class="czi-user mr-2 ml-n1"></i>Üye Ol</button>
+            </div>
+          </form>
+        </div>
+  </div>
+</div>

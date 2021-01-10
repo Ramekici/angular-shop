@@ -1,0 +1,76 @@
+<section class="pt-7 pb-12">
+    <div class="container">
+      <div class="row">
+          <div class="col-12 text-center">
+            <app-heading></app-heading>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-3">
+          <app-leftside></app-leftside>
+        </div>
+        <div class="col-12 col-md-9 col-lg-8 offset-lg-1">
+          <!-- Products -->
+          <div class="row">
+            <!-- Item -->
+            <div class="col-6 col-md-4" *ngFor="let product of wishList">
+              <div class="card mb-7">
+                <!-- Image -->
+                <div class="card-img">
+                  <!-- Action -->
+                  <button class="btn btn-xs btn-circle btn-white-primary card-action card-action-right">
+                    <i class="far fa-times-circle"></i>
+                  </button>
+                  <!-- Button -->
+                  <button class="btn btn-xs btn-block btn-dark card-btn" data-toggle="modal" data-target="#modalProduct">
+                    <i class="fas fa-eye mr-2 mb-1"></i> Gözat
+                  </button>
+                  <!-- Image -->
+                  <img class="card-img-top" [src]="product.image1" alt="...">
+                </div>
+                <!-- Body -->
+                <div class="card-body font-weight-bold text-center">
+                  <a class="text-body" href="product.html"> {{product.isim}} </a> <br>
+                  <span class="text-muted"> {{product.indirim}} ₺ </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pagination -->
+          <nav class="d-flex justify-content-center justify-content-md-end">
+            <ul class="pagination pagination-sm text-gray-400">
+              <li class="page-item">
+                <a class="page-link page-link-arrow" href="#">
+                  <i class="fas fa-caret-left"></i>
+                </a>
+              </li>
+              <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">2</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">3</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">4</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">5</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">6</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link page-link-arrow" href="#">
+                  <i class="fa fa-caret-right"></i>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
