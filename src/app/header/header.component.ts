@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, DoCheck } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
 import { ProductsService } from '../create-products/products.service';
@@ -10,7 +10,10 @@ import { CartService } from '../shopping/cart.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+
+
+export class HeaderComponent implements OnInit, OnDestroy, DoCheck {
+
   userIsAuthenticated = false;
   private authListenerSub: Subscription;
   cartProducts: any = [];
@@ -19,8 +22,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   showMenu = false;
   modalStatus = false;
   userId: string;
+  lastKnownScrollPosition = 0;
+  ticking = false;
 
-  constructor(private authService: AuthService, public productService: ProductsService,
+  constructor(private authService: AuthService,
+              public productService: ProductsService,
               public cartService: CartService) { }
 
   ngOnInit() {
@@ -40,6 +46,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+
+
   changeMenu() {
     this.showMenu = !this.showMenu;
   }
@@ -48,8 +56,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authService.logoutUser();
   }
 
+  scrll = () => {
+    this.lastKnownScrollPosition = window.scrollY;
+  };
+  
+  ngDoCheck(){
+    window.addEventListener('scroll', this.scrll)
+  }
+
   ngOnDestroy() {
     this.authListenerSub.unsubscribe();
+    window.removeEventListener('unscroll', this.scrll);
   }
 
   onChangeModal() {

@@ -8,9 +8,12 @@ import { Subscription } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit, OnDestroy {
   isLoading = false;
   private authStatusSub: Subscription;
+
+  isText = false;
 
   constructor(public authService: AuthService) { }
 
@@ -33,6 +36,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.authStatusSub.unsubscribe();
+  }
+
+  onShowText = () => {
+    this.isText = !this.isText;
+    console.log(event)
   }
 
 }

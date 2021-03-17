@@ -31,10 +31,7 @@ router.get('/:siparis_id',(req,res)=>{
 
 // urun bilgilerini gönderen api
 router.post('/', checkAuth, (req, res, next)=>{
-    //const {errors, isValid} = validateUrunlerInput(req.body);
-    //if(!isValid){
-    //    return res.status(400).json(errors);
-    //}
+
     const newOrder = new Order({
         user:req.userData.userId,
         adres: {

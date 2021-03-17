@@ -13,5 +13,4 @@ export interface Product {
   renk1: string;
   renk2: string;
   renk3: string;
-
 }

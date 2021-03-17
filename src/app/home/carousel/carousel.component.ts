@@ -11,12 +11,12 @@ export class CarouselComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    setInterval(() => {
-      if (this.index === 2) {
-        this.index  = 0;
-      } else if (this.index < 2) {
-        this.index += 1;
-      }}, 10000);
+    // setInterval(() => {
+    //   if (this.index === 2) {
+    //     this.index  = 0;
+    //   } else if (this.index < 2) {
+    //     this.index += 1;
+    //   }}, 10000);
   }
 
   onNext() {

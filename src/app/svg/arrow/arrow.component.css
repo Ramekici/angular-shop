@@ -1,0 +1,9 @@
+.arrow-right{
+  transform: rotate(0.5turn);
+  color: rgb(133, 130, 130);
+
+}
+
+.arrow-left{
+  color: rgb(133, 130, 130);
+}

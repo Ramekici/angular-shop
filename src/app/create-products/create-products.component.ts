@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductsService } from './products.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './create-products.component.html',
   styleUrls: ['./create-products.component.css']
 })
-export class CreateProductsComponent implements OnInit, OnDestroy  {
+export class CreateProductsComponent implements OnInit, OnDestroy {
 
   mode = 'create';
   private productId: string;
@@ -21,30 +21,33 @@ export class CreateProductsComponent implements OnInit, OnDestroy  {
   form: FormGroup;
   product: DetailP;
   private authStatusSub: Subscription;
+  private productCategorySub: Subscription;
+
+  datas: { category: string, _id: string }[] = [];
 
   constructor(public productsService: ProductsService, public route: ActivatedRoute,
-              private authService: AuthService) { }
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.authStatusSub = this.authService
-          .getAuthStatus()
-          .subscribe( authStatus => {
-            this.loading = false;
-          });
-    this.form =  new FormGroup({
-      sektor: new FormControl(null, {validators: [Validators.required, Validators.minLength(3)]}),
-      isim: new FormControl(null, {validators: [Validators.required]}),
-      marka: new FormControl(null, {validators: [Validators.required]}),
-      fiyat: new FormControl(null, {validators: [Validators.required]}),
-      miktar: new FormControl(null, {validators: [Validators.required]}),
-      aciklama: new FormControl(null, {validators: [Validators.required]}),
+      .getAuthStatus()
+      .subscribe(authStatus => {
+        this.loading = false;
+      });
+    this.form = new FormGroup({
+      sektor: new FormControl(null, { validators: [Validators.required, Validators.minLength(3)] }),
+      isim: new FormControl(null, { validators: [Validators.required] }),
+      marka: new FormControl(null, { validators: [Validators.required] }),
+      fiyat: new FormControl(null, { validators: [Validators.required] }),
+      miktar: new FormControl(null, { validators: [Validators.required] }),
+      aciklama: new FormControl(null, { validators: [Validators.required] }),
       indirim: new FormControl(null),
       renk: new FormGroup({
         renk1: new FormControl(null),
         renk2: new FormControl(null),
         renk3: new FormControl(null)
       }),
-      imagem: new FormControl(null, {validators: [Validators.required]})
+      imagem: new FormControl(null, { validators: [Validators.required] })
     });
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -52,7 +55,6 @@ export class CreateProductsComponent implements OnInit, OnDestroy  {
         this.mode = 'edit';
         this.productId = paramMap.get('productId');
         this.productsService.getProductOne(this.productId).subscribe(productData => {
-          console.log(productData);
           this.product = {
             id: productData._id, sektor: productData.sektor,
             isim: productData.isim, marka: productData.marka,
@@ -67,7 +69,8 @@ export class CreateProductsComponent implements OnInit, OnDestroy  {
             date: null,
             yorumlar: null
           };
-          this.form.setValue({sektor: this.product.sektor, isim: this.product.isim, marka: this.product.marka,
+          this.form.setValue({
+            sektor: this.product.sektor, isim: this.product.isim, marka: this.product.marka,
             fiyat: this.product.fiyat, miktar: this.product.miktar,
             aciklama: this.product.aciklama, indirim: this.product.indirim,
             renk: {
@@ -75,7 +78,8 @@ export class CreateProductsComponent implements OnInit, OnDestroy  {
               renk2: this.product.renk.renk2,
               renk3: this.product.renk.renk3
             },
-            imagem: this.product.imagePath }
+            imagem: this.product.imagePath
+          }
           );
         });
       } else {
@@ -83,15 +87,21 @@ export class CreateProductsComponent implements OnInit, OnDestroy  {
         this.productId = null;
       }
     });
+
+    this.productCategorySub = this.productsService.getCategory().subscribe(res => {
+      return this.datas.push(...res);
+    }
+  )
   }
   ngOnDestroy() {
     this.authStatusSub.unsubscribe();
+    this.productCategorySub.unsubscribe();
   }
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
-    this.form.patchValue({imagem: file});
+    this.form.patchValue({ imagem: file });
     this.form.get('imagem').updateValueAndValidity();
-    const reader =  new FileReader();
+    const reader = new FileReader();
     reader.onload = () => {
       this.imagePreview = reader.result;
     };
@@ -99,7 +109,7 @@ export class CreateProductsComponent implements OnInit, OnDestroy  {
   }
 
   onAddUpdateProduct() {
-    if ( this.form.invalid ) {
+    if (this.form.invalid) {
       return;
     }
     if (this.mode === 'create') {
@@ -111,7 +121,7 @@ export class CreateProductsComponent implements OnInit, OnDestroy  {
       this.productsService.updateProduct(this.productId, this.form.value.sektor, this.form.value.isim, this.form.value.marka,
         this.form.value.fiyat, this.form.value.miktar, this.form.value.aciklama, this.form.value.indirim, this.form.value.renk.renk1,
         this.form.value.renk.renk2, this.form.value.renk.renk3,
-        this.form.value.imagem, null );
+        this.form.value.imagem, null);
     }
     // this.form.reset();
   }

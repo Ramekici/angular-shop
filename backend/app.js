@@ -41,13 +41,13 @@ app.use('/api/orders', orders);
 
 // Set your secret key: remember to switch to your live secret key in production
 // See your keys here: https://dashboard.stripe.com/account/apikeys
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+// const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
-(async () => {
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: 1099,
-    currency: 'try',
-  });
-})();
+// (async () => {
+//   const paymentIntent = await stripe.paymentIntents.create({
+//     amount: 1099,
+//     currency: 'try',
+//   });
+// })();
 
 module.exports = app;

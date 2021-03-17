@@ -13,6 +13,7 @@ const backendUrl = environment.apiUrl;
 })
 
 export class AuthService {
+  
   private userId: string;
   private token: string;
   private isAuthenticated = false;

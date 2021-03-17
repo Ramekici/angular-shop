@@ -1,0 +1,9 @@
+.bg-sahra{
+  background-color: rgb(243, 243, 247);
+  transition: all .3s ease-in;
+}
+
+.bg-transparent{
+  color: rgb(32, 32, 71);
+  background-color: rgba(105, 105, 105, 0.445);
+}

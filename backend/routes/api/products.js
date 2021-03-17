@@ -3,47 +3,16 @@ const router = express.Router();
 const Products = require('../../models/Product');
 const Profiles = require('../../models/Profile');
 const checkAuth = require('../../middleware/check-auth');
+const productController =  require('../../controllers/products');
+
 
 const validateUrunlerInput = require('../../validation/Urunler');
-//const validateAdresInput = require('../../validation/Adres');
-//const validateKrediKartInput = require('../../validation/KrediKart');
+
 
 // tum ürünleri almak için pagination
-router.get('',(req, res, next)=>{
-  const pageSize= +req.query.ps;
-  const currentPage= +req.query.pg;
-  var urunlerim = Products.find();
-  let fetchProducts;
-  if(pageSize && currentPage){
-    urunlerim
-    .sort({date:-1})
-    .skip(pageSize * (currentPage - 1))
-    .limit(pageSize);
-  }
-  urunlerim
-    .then(urun => { fetchProducts = urun; return Products.countDocuments()})
-    .then(count => res.json({products: fetchProducts, message:"urunler gönderildi", maxProducts: count}))
-    .catch(err => res.status(404).json({
-      message: "urunleri getirme başarısız"
-    }));
-});
-
-router.get('/:productId',(req, res, next)=>{
-  Products.findById(req.params.productId)
-    .then(urun =>  {
-      console.log(urun);
-      res.status(201).json(urun);
-    })
-    .catch(err=> res.status(404).json({message :"Urun bulunamadı"}));
-});
-
-
-router.get('/:gt-:lt-:urun-:marka',(req, res, next)=>{
-  Products.find({fiyat: { $gt:req.params.gt, $lt: req.params.lt}, sektor:req.params.urun.toLowerCase(), marka:req.params.marka.toLowerCase()})
-    .sort({date:-1})
-    .then(urunler => res.json(urunler))
-    .catch(err => res.status(404));
-});
+router.get('', productController.getProducts);
+router.get('/:productId', productController.getProductsId);
+router.get('/:gt-:lt-:urun-:marka', productController.getFilter);
 
 
 
@@ -104,7 +73,7 @@ router.post('/like/:urun_id', checkAuth, (req,res)=>{
 
 });
 
-router.post('/unlike/:urun_id', checkAuth, (req,res)=>{
+router.post('/unlike/:urun_id', checkAuth, (req,res, next)=>{
     Profiles.findOne({user:req.user.id})
         .then(profile=>{
           Products.findById(req.params.id)

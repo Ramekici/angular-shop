@@ -5,7 +5,9 @@ const jwt = require('jsonwebtoken');
 const keys = require('../config/config');
 
 exports.createUser = (req, res, next) => {
-  bcrypt.hash(req.body.password,10)
+
+  console.log(req.body);
+  bcrypt.hash(req.body.password, 10)
     .then( hash =>{
       const user= new User({
         name:req.body.name,

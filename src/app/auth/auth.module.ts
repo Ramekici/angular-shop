@@ -6,12 +6,14 @@ import { AngularMaterialModule } from '../angular-material.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthRoutingModule } from './auth-routing.module';
+import { SocialComponent } from './social/social.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    SocialComponent
   ],
   imports: [
     CommonModule,

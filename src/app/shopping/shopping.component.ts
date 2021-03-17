@@ -6,7 +6,7 @@ import { DetailP } from './detail-product/detail-product.model';
 @Component({
   selector: 'app-shopping',
   templateUrl: './shopping.component.html',
-  styleUrls: ['./shopping.component.css', '../shopping/products/theme.component.css']
+  styleUrls: ['../shopping/products/theme.component.css']
 })
 
 

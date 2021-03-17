@@ -19,7 +19,6 @@ import { TanitimComponent } from './home/tanitim/tanitim.component';
 import { ArrivalsComponent } from './home/arrivals/arrivals.component';
 import { ShopkategoriComponent } from './home/shopkategori/shopkategori.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
-import { CreateProductsComponent } from './create-products/create-products.component';
 import { OrdersComponent } from './account/orders/orders.component';
 import { ShopadminComponent } from './shopadmin/shopadmin.component';
 import { ProductionComponent } from './shopadmin/production/production.component';
@@ -36,6 +35,9 @@ import { SearchComponent } from './shopping/search/search.component';
 import { FeaturesComponent } from './shopping/detail-product/features/features.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorComponent } from './auth/error/error.component';
+import { CategoriesComponent } from './header/categories/categories.component';
+import { ArrowComponent } from './svg/arrow/arrow.component';
+import { CreateProductsModule } from './create-products/create-products.module';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,6 @@ import { ErrorComponent } from './auth/error/error.component';
     ArrivalsComponent,
     ShopkategoriComponent,
     PagenotfoundComponent,
-    CreateProductsComponent,
     OrdersComponent,
     ShopadminComponent,
     ProductionComponent,
@@ -64,6 +65,8 @@ import { ErrorComponent } from './auth/error/error.component';
     DropdownDirective,
     ModalDirective,
     ProdDirective,
+    CategoriesComponent,
+    ArrowComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +78,7 @@ import { ErrorComponent } from './auth/error/error.component';
     ShoppingModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
+    CreateProductsModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
               {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
