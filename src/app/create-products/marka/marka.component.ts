@@ -10,25 +10,29 @@ import { ProductsService } from '../products.service';
 export class MarkaComponent implements OnInit {
 
   form: FormGroup;
-  datas:{category: string, _id: string}[] =[];
+  datas:{marka: string, _id: string}[] =[];
   constructor(private ProductService : ProductsService) { }
 
   ngOnInit() {
     this.form =  new FormGroup({
       marka: new FormControl(null, {validators: [Validators.required, Validators.minLength(3)]}),
     });
-    this.ProductService.getCategory().subscribe(res => {
+    this.ProductService.getMarka().subscribe(res => {
         return this.datas.push(...res);
-      }
-    )
+    })
   }
 
   onAddMarka = () =>{
-    this.ProductService.addCategory(this.form.value.marka)
+    this.ProductService.addMarka(this.form.value.marka).subscribe(res => {
+      this.datas.push({marka: this.form.value.marka, _id: Date.now().toString()})
+    })
   }
 
   onDelete = (id: string)=> {
-    this.ProductService.deleteCategory(id);
+    this.ProductService.deleteCategory(id).subscribe(res => {
+      const index = this.datas.findIndex(item => item._id === id);
+      return this.datas.splice(index, 1);
+    })
   }
 
 

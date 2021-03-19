@@ -5,18 +5,14 @@ const productSchema =  mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref:'users'
     },
-    sektor:{ type:String, required:true },
+    category:{ type:String, required:true },
     isim:{ type:String,required:true },
     marka:{ type:String, required:true },
     miktar:{ type:Number, required:true },
     fiyat:{ type:Number, required:true },
     aciklama:{ type:String, required:true },
     indirim:{ type:Number },
-    renk:{
-      renk1:{ type:String },
-      renk2:{ type:String },
-      renk3:{ type:String }
-    },
+    renk:[],
     imagePath: { type:String },
     yorumlar:[{
       kullanıcı:{

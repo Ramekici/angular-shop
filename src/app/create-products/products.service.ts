@@ -19,6 +19,7 @@ export class ProductsService {
   private products: DetailP[] = [];
   private detailProduct: DetailP;
   private productsUpdated = new Subject<{ products: DetailP[], productsMiktar: number }>();
+
   private modalStatus = false;
   private modal = new Subject<boolean>();
 
@@ -91,16 +92,16 @@ export class ProductsService {
       });
   }
 
-  addProduct(sektor: string, isim: string, marka: string,
-    fiyat: number, miktar: number, aciklama: string, indirim: number,
-    renk1: string, renk2: string, renk3: string, imagem: File | string) {
+  addProduct(category: string, isim: string, marka: string,
+             fiyat: number, miktar: number, aciklama: string, indirim: number,
+             renkler: string[], imagem: File | string) {
     const product = new FormData();
-    product.append('sektor', sektor); product.append('isim', isim);
+    product.append('category', category); product.append('isim', isim);
     product.append('marka', marka); product.append('fiyat', fiyat.toString());
     product.append('miktar', miktar.toString());
     product.append('aciklama', aciklama); product.append('indirim', indirim.toString());
-    product.append('renk1', renk1); product.append('renk2', renk2);
-    product.append('renk3', renk3); product.append('imagem', imagem, isim);
+    product.append('renkler', renkler[0]);
+    product.append('imagem', imagem, isim);
     this.http
       .post<{ message: string; product: DetailP }>(backendUrl + '/admin', product)
       .subscribe(resp => {
@@ -109,20 +110,14 @@ export class ProductsService {
   }
 
   addCategory = (category: string) => {
-    this.http
-      .post<{ message: string }>(backendUrl + '/admin/category', {category:category}, {
-        observe:"response"
-      })
-      .subscribe(resp => {
-        console.log(resp);
-      });
+    return this.http
+      .post<{ _id: string }>(backendUrl + '/admin/category', {category})
   }
 
   addMarka = (marka: string) => {
-    this.http
-      .post<{ message: string }>(backendUrl + '/admin/marka', {marka: marka})
-      .subscribe(resp => {
-      });
+    return this.http
+      .post<{ message: string }>(backendUrl + '/admin/marka', {marka})
+
   }
 
   getCategory = () => {
@@ -130,37 +125,40 @@ export class ProductsService {
       .get<{ category: string, _id: string }[]>(backendUrl + '/admin/getcategory')
   }
 
+  getMarka = () => {
+    return this.http
+      .get<{ marka: string, _id: string }[]>(backendUrl + '/admin/getmarka')
+  }
+
   deleteCategory = (id: string) => {
     return this.http
-      .delete(backendUrl + `/admin/category/${id}`, {
-        observe:"response"
-      })
-      .subscribe(resp =>{
-        console.log(resp);
-        return this.getCategory();
-      })
+      .delete(backendUrl + `/admin/category/${id}`)
+  }
+
+  deleteMarka = (id: string) => {
+    return this.http
+      .delete(backendUrl + `/admin/marka/${id}`)
   }
 
   deleteProduct(productId: string) {
     return this.http.delete(backendUrl + '/admin/' + productId);
   }
 
-  updateProduct(id: string, sektor: string, isim: string, marka: string,
-    fiyat: number, miktar: number, aciklama: string, indirim: number, renk1: string,
-    renk2: string, renk3: string, imagem: File | string, yorumlar) {
+  updateProduct(id: string, category: string, isim: string, marka: string,
+                fiyat: number, miktar: number, aciklama: string, indirim: number,
+                renkler: string[], imagem: File | string, yorumlar) {
     let updateProduct;
     if (typeof (imagem) === 'object') {
       updateProduct = new FormData(); updateProduct.append('id', id);
-      updateProduct.append('sektor', sektor); updateProduct.append('isim', isim);
+      updateProduct.append('category', category); updateProduct.append('isim', isim);
       updateProduct.append('marka', marka); updateProduct.append('fiyat', fiyat.toString());
       updateProduct.append('miktar', miktar.toString());
       updateProduct.append('aciklama', aciklama); updateProduct.append('indirim', indirim.toString());
-      updateProduct.append('renk1', renk1); updateProduct.append('renk2', renk2);
-      updateProduct.append('renk3', renk3); updateProduct.append('imagem', imagem, isim);
+      updateProduct.append('renkler', renkler[0]); updateProduct.append('imagem', imagem, isim);
     } else {
       updateProduct = {
-        id, sektor, isim, marka, fiyat, miktar, aciklama,
-        indirim, renk: { renk1, renk2, renk3 }, imagePath: imagem, yorumlar
+        id, category, isim, marka, fiyat, miktar, aciklama,
+        indirim, renkler: {...renkler }, imagePath: imagem, yorumlar
       };
     }
     this.http

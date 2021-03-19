@@ -1,0 +1,24 @@
+<div [formGroupName]="profileForm">
+  <div class="row no-gutters align-items-center" formArrayName="aliases">
+    <h5 class="mb-0"> Renkler </h5>
+    <button
+      class="btn btn-sm p-1 ml-3 border-primary"
+      type="button"
+      (click)="addAlias()"
+    >
+      Renk Ekle
+    </button>
+  </div>
+  <div class="row no-gutters">
+    <div
+      class="form-group"
+      *ngFor=" let alias of aliases.controls; let i=index"
+    >
+      <div class="row no-gutters pr-2" style="flex-direction: column;">
+        <label>
+        <input type="text" [formControlName]="i"/>
+      </label>
+      </div>
+    </div>
+  </div>
+</div>

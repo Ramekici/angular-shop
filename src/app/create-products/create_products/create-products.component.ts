@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ProductsService } from './products.service';
+import { ProductsService } from '../products.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { DetailP } from '../shopping/detail-product/detail-product.model';
-import { AuthService } from '../auth/auth.service';
-import { Subscription } from 'rxjs';
+import { DetailP } from '../../shopping/detail-product/detail-product.model';
+import { AuthService } from '../../auth/auth.service';
+import { Subscription, Subject } from 'rxjs';
 
 
 @Component({
@@ -22,8 +22,12 @@ export class CreateProductsComponent implements OnInit, OnDestroy {
   product: DetailP;
   private authStatusSub: Subscription;
   private productCategorySub: Subscription;
+  private productMarkaSub: Subscription;
+
+  //private datas = new Subject<{ category: string, _id: string}[]>();
 
   datas: { category: string, _id: string }[] = [];
+  dataMarka: { marka: string, _id: string }[] = [];
 
   constructor(public productsService: ProductsService, public route: ActivatedRoute,
     private authService: AuthService) { }
@@ -56,7 +60,7 @@ export class CreateProductsComponent implements OnInit, OnDestroy {
         this.productId = paramMap.get('productId');
         this.productsService.getProductOne(this.productId).subscribe(productData => {
           this.product = {
-            id: productData._id, sektor: productData.sektor,
+            id: productData._id, category: productData.sektor,
             isim: productData.isim, marka: productData.marka,
             fiyat: productData.fiyat, miktar: productData.miktar,
             aciklama: productData.aciklama, indirim: productData.indirim,
@@ -70,7 +74,7 @@ export class CreateProductsComponent implements OnInit, OnDestroy {
             yorumlar: null
           };
           this.form.setValue({
-            sektor: this.product.sektor, isim: this.product.isim, marka: this.product.marka,
+            sektor: this.product.category, isim: this.product.isim, marka: this.product.marka,
             fiyat: this.product.fiyat, miktar: this.product.miktar,
             aciklama: this.product.aciklama, indirim: this.product.indirim,
             renk: {
@@ -90,8 +94,10 @@ export class CreateProductsComponent implements OnInit, OnDestroy {
 
     this.productCategorySub = this.productsService.getCategory().subscribe(res => {
       return this.datas.push(...res);
-    }
-  )
+    });
+    this.productMarkaSub = this.productsService.getMarka().subscribe(res => {
+      return this.dataMarka.push(...res);
+    });
   }
   ngOnDestroy() {
     this.authStatusSub.unsubscribe();
@@ -109,20 +115,20 @@ export class CreateProductsComponent implements OnInit, OnDestroy {
   }
 
   onAddUpdateProduct() {
-    if (this.form.invalid) {
-      return;
-    }
-    if (this.mode === 'create') {
-      this.productsService.addProduct(this.form.value.sektor, this.form.value.isim, this.form.value.marka,
-        this.form.value.fiyat, this.form.value.miktar, this.form.value.aciklama, this.form.value.indirim, this.form.value.renk.renk1,
-        this.form.value.renk.renk2, this.form.value.renk.renk3,
-        this.form.value.imagem);
-    } else {
-      this.productsService.updateProduct(this.productId, this.form.value.sektor, this.form.value.isim, this.form.value.marka,
-        this.form.value.fiyat, this.form.value.miktar, this.form.value.aciklama, this.form.value.indirim, this.form.value.renk.renk1,
-        this.form.value.renk.renk2, this.form.value.renk.renk3,
-        this.form.value.imagem, null);
-    }
+    // if (this.form.invalid) {
+    //   return;
+    // }
+    // if (this.mode === 'create') {
+    //   this.productsService.addProduct(this.form.value.sektor, this.form.value.isim, this.form.value.marka,
+    //     this.form.value.fiyat, this.form.value.miktar, this.form.value.aciklama, this.form.value.indirim, this.form.value.renk.renk1,
+    //     this.form.value.renk.renk2, this.form.value.renk.renk3,
+    //     this.form.value.imagem);
+    // } else {
+    //   this.productsService.updateProduct(this.productId, this.form.value.sektor, this.form.value.isim, this.form.value.marka,
+    //     this.form.value.fiyat, this.form.value.miktar, this.form.value.aciklama, this.form.value.indirim, this.form.value.renk.renk1,
+    //     this.form.value.renk.renk2, this.form.value.renk.renk3,
+    //     this.form.value.imagem, null);
+    // }
     // this.form.reset();
   }
 

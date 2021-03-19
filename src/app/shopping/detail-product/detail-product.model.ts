@@ -1,6 +1,6 @@
 export interface DetailP {
+  category: any;
   id: string;
-  sektor: string;
   isim: string;
   marka: string;
   fiyat: number;

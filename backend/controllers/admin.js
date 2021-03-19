@@ -1,6 +1,6 @@
 const Products = require('../models/Product');
 const Category = require('../models/Category');
-
+const Marka = require('../models/Marka');
 
 
 exports.productCreated = async (req, res, next) => {
@@ -8,18 +8,14 @@ exports.productCreated = async (req, res, next) => {
   try {
     const url = req.protocol + '://' + req.get("host");
     const newUrunler = new Products({
-      sektor: req.body.sektor,
+      category: req.body.category,
       isim: req.body.isim,
       marka: req.body.marka,
       fiyat: parseInt(req.body.fiyat, 0),
       miktar: parseInt(req.body.miktar, 0),
       aciklama: req.body.aciklama,
       indirim: parseInt(req.body.indirim, 0),
-      renk: {
-        renk1: req.body.renk1,
-        renk2: req.body.renk2,
-        renk3: req.body.renk3
-      },
+      renk: req.body.renkler,
       imagePath: url + '/images/' + req.file.filename,
       user: req.userData.userId
     });
@@ -50,7 +46,23 @@ exports.categoryCreated = async (req, res, next) => {
     const newCategory = new Category({
       category: req.body.category
     });
-    await newCategory.save();
+    const data = await newCategory.save();
+    res.status(201).json(data._id);
+  } catch (err) {
+    res.status(403).json(err);
+  }
+}
+
+exports.markaCreated = async (req, res, next) => {
+  try {
+    const markaCategory = await Marka.findOne({marka: req.body.marka});
+    if(markaCategory){
+      return res.status(403).json({message: "Aynı marka mevcut."});
+    }
+    const newMarka = new Marka({
+      marka: req.body.marka
+    });
+    await newMarka.save();
     res.status(201).json({message:"Urun Başarılı"});
   } catch (err) {
     res.status(403).json(err);
@@ -58,10 +70,18 @@ exports.categoryCreated = async (req, res, next) => {
 }
 
 
+exports.markaDelete= async (req, res, next) => {
+  try {
+    await Marka.deleteOne({_id: req.params.id});
+    res.status(201).json();
+  } catch (err) {
+    res.status(403).json(err);
+  }
+}
+
 exports.categoryDelete = async (req, res, next) => {
   try {
-    const data = await Category.deleteOne({_id: req.params.id});
-    console.log(data);
+    await Category.deleteOne({_id: req.params.id});
     res.status(201).json();
   } catch (err) {
     res.status(403).json(err);
@@ -77,6 +97,14 @@ exports.categoryGet= async (req, res, next) => {
   }
 }
 
+exports.markaGet= async (req, res, next) => {
+  try {
+    const response = await Marka.find();
+    res.status(201).json(response);
+  } catch (err) {
+    res.status(403).json(err);
+  }
+}
 
 exports.productUpdated = (req, res, next) => {
 

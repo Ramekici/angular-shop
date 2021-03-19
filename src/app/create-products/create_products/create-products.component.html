@@ -1,0 +1,178 @@
+<div class="container mx-auto mb-5 pb-3">
+  <div class="row">
+    <section class="col-lg-8 pt-lg-4 pb-4 mb-3 mx-auto">
+      <div class="pt-2 px-4 pl-lg-0 pr-xl-5">
+        <div class="d-sm-flex flex-wrap justify-content-between align-items-center pb-2">
+          <h2 class="h3 py-2 mx-auto text-center text-sm-left text-muted">
+            Yeni Ürün Ekle
+          </h2>
+        </div>
+        <form
+          (submit)="onAddUpdateProduct()"
+          [formGroup]="form"
+          enctype="multipart/form-data"
+        >
+          <div class="form-group pb-2">
+            <select
+              class="form-control"
+              placeholder="Ürün Sektör"
+              type="text"
+              formControlName="sektor"
+            >
+              <option defaultValue="">Select One …</option>
+              <option *ngFor="let data of datas" [value]="data.category">
+                {{ data.category }}
+              </option>
+            </select>
+            <div
+              *ngIf="!form.get('sektor').valid && form.get('sektor').touched"
+              class="help-block"
+            >
+              Bu alan boş bırakılmamalıdır.
+            </div>
+          </div>
+          <div class="form-group pb-2">
+            <select
+              class="form-control"
+              placeholder="Ürün Sektör"
+              type="text"
+              formControlName="marka"
+            >
+              <option *ngFor="let data of dataMarka" [value]="data.marka">
+                {{ data.marka }}
+              </option>
+            </select>
+            <div
+              *ngIf="!form.get('marka').valid && form.get('marka').touched"
+              class="help-block"
+            >
+              Bu alan boş bırakılmamalıdır.
+            </div>
+          </div>
+          <div class="form-group pb-2">
+            <input
+              class="form-control"
+              placeholder="Urun Adı"
+              type="text"
+              formControlName="isim"
+            />
+            <div
+              *ngIf="!form.get('isim').valid && form.get('isim').touched"
+              class="help-block"
+            >
+              Bu alan boş bırakılmamalıdır.
+            </div>
+          </div>
+          <div class="form-group pb-2">
+            <input
+              class="form-control"
+              type="number"
+              placeholder="Urun Stok Miktarı"
+              formControlName="miktar"
+            />
+            <div
+              *ngIf="!form.get('miktar').valid && form.get('miktar').touched"
+              class="help-block"
+            >
+              Bu alan boş bırakılmamalıdır.
+            </div>
+          </div>
+          <app-select-color></app-select-color>
+          <div formGroupName="renk">
+            <div class="form-group pb-2">
+              <input
+                class="form-control"
+                type="text"
+                placeholder="renk1"
+                formControlName="renk1"
+              />
+            </div>
+            <div class="form-group pb-2">
+              <input
+                class="form-control"
+                type="text"
+                placeholder="renk2"
+                formControlName="renk2"
+              />
+            </div>
+            <div class="form-group pb-2">
+              <input
+                class="form-control"
+                type="text"
+                placeholder="renk3"
+                formControlName="renk3"
+              />
+            </div>
+          </div>
+          <div class="pb-2">
+            <button class="btn-sm" type="button" (click)="filePicker.click()">
+              Resim Ekle
+            </button>
+            <input
+              style="display: hidden;"
+              type="file"
+              #filePicker
+              (change)="onImagePicked($event)"
+            />
+          </div>
+          <div class="image-review" *ngIf="imagePreview !== '' && imagePreview">
+            <img [src]="imagePreview" alt="..." />
+          </div>
+          <div class="form-group py-2">
+            <textarea
+              class="form-control"
+              rows="6"
+              placeholder="Urun Bilgisi"
+              formControlName="aciklama"
+            ></textarea>
+            <div
+              *ngIf="
+                !form.get('aciklama').valid && form.get('aciklama').touched
+              "
+              class="help-block"
+            >
+              Bu alan boş bırakılmamalıdır.
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">₺</span>
+                </div>
+                <input
+                  class="form-control"
+                  type="number"
+                  placeholder="Urun Fiyatı"
+                  formControlName="fiyat"
+                />
+                <div
+                  *ngIf="!form.get('fiyat').valid && form.get('fiyat').touched"
+                  class="help-block"
+                >
+                  Bu alan boş bırakılmamalıdır.
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">₺</span>
+                </div>
+                <input
+                  class="form-control"
+                  type="number"
+                  placeholder="Urun İndirmli Fiyatı"
+                  formControlName="indirim"
+                />
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">
+            Ürünü Yükle
+          </button>
+        </form>
+      </div>
+    </section>
+  </div>
+</div>
